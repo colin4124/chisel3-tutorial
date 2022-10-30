@@ -57,6 +57,13 @@ object Main extends App {
 
 在项目的根目录运行： ~make verilog~ , 生成的 ~verilog~ 放在 ~builds~ 目录下。
 * 前置知识：Scala 语法
+启动命令行解释器，可以执行下面的示例代码：
+
+#+begin_src bash
+  scratchip create foo
+  cd foo
+  make repl
+#+end_src
 ** 变量
 通过 ~var~ 或者 ~val~ 来声明变量。 ~val~ 声明不可变的， ~var~ 声明可修改的。
 
