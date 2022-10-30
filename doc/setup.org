@@ -5,7 +5,7 @@
 #+begin_src bash
   git clone git@github.com:colin4124/chisel3-tutorial.git
   cd chisel3-tutorial
-  make preppare
+  make prepare
 #+end_src
 
 ** 使用 scratchip 创建开发环境
@@ -67,7 +67,7 @@ object Main extends App {
   y = 20     // 正确：对 var 声明的变量可以重新赋值，现在 y 是 20
 #+end_src
 
-**Scala** 是静态语言，上面的声明方式并没有指定类型。因为 scala 编译器可以推测变量的类型。也可以像下面这样声明：
+*Scala* 是静态语言，上面的声明方式并没有指定类型。因为 *Scala* 编译器可以推测变量的类型。也可以像下面这样声明：
 
 #+begin_src scala
   val z: Int = 10
@@ -83,7 +83,7 @@ object Main extends App {
   def functionName(args...): ReturnType = { body... }
 #+end_src
 
-如果您以前学习过传统的编程语言，注意 return 关键字的省略。Scala 中， 函数代码块最后一条表达式就是返回值。
+*Scala* 中， 函数代码块最后一条表达式就是返回值，不需要写 ~return~ 关键字。
 
 #+begin_src scala
 def sumOfSquares(x: Int, y: Int): Int = {
@@ -93,7 +93,7 @@ def sumOfSquares(x: Int, y: Int): Int = {
 }
 #+end_src
 
-如果函数体是单行表达式，~{ }~ 可以省略：
+如果函数体是单行表达式， ~{ }~ 可以省略：
 
 #+begin_src scala
 def sumOfSquaresShort(x: Int, y: Int): Int = x * x + y * y
@@ -123,7 +123,7 @@ addWithDefault(1)  // => 6
 #+end_src
 
 和 ~def~ 不同，如果语义清晰，匿名函数的参数类型也可以省略。
-类型 ~"Int => Int"~ 意味着这个函数接收一个 ~Int~ 并返回一个 ~Int~ 。
+类型 ~Int => Int~ 意味着这个函数接收一个 ~Int~ 并返回一个 ~Int~ 。
 
 #+begin_src scala
 val sq: Int => Int = x => x * x
@@ -157,7 +157,7 @@ weirdSum(2, 4)  // => 16
   (5 to 1 by -1) foreach ( println )
 #+end_src
 
-while 循环:
+*while* 循环:
 
 #+begin_src scala
   var i = 0
@@ -165,13 +165,10 @@ while 循环:
 
   while (i < 10) {  println("i " + i); i+=1  }   // 没错，再执行一次，发生了什么？为什么？
 
-  i    // 显示 i 的值。注意 while 是经典的循环方式，它连续执行并改变循环中的变量。
-       // while 执行很快，比 Java 的循环快，但像上面所看到的那样用组合子和推导式
-       // 更易于理解和并行化。
-
+  i    // 显示 i 的值
 #+end_src
 
-do while 循环
+*do while* 循环
 
 #+begin_src scala
   do {
@@ -195,15 +192,19 @@ println(if (x == 10) "yeah" else "nope")
 val text = if (x == 10) "yeah" else "nope"
 #+end_src
 
-
 ** 数据结构
+
+*** 数组
 #+begin_src scala
 
 val a = Array(1, 2, 3, 5, 8, 13)
 a(0)
 a(3)
 a(21)    // 抛出异常
+#+end_src
 
+*** Map
+#+begin_src scala
 val m = Map("fork" -> "tenedor", "spoon" -> "cuchara", "knife" -> "cuchillo")
 m("fork")
 m("spoon")
@@ -211,40 +212,37 @@ m("bottle")       // 抛出异常
 
 val safeM = m.withDefaultValue("no lo se")
 safeM("bottle")
-
-val s = Set(1, 3, 7)
-s(0)
-s(1)
-
-/* 这里查看 map 的文档 -
- * http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.Map
- * 并确保你会阅读
- */
-
 #+end_src
 
-元组
+*** Set
 
 #+begin_src scala
-(1, 2)
+  val s = Set(1, 3, 7)
+  s(0)
+  s(1)
+#+end_src
 
-(4, 3, 2)
+*** 元组
 
-(1, 2, "three")
+#+begin_src scala
+  (1, 2)
 
-(a, 2, "three")
+  (4, 3, 2)
 
-// 为什么有这个？
-val divideInts = (x:Int, y:Int) => (x / y, x % y)
+  (1, 2, "three")
 
-divideInts(10,3) // 函数 divideInts 同时返回结果和余数
+  (a, 2, "three")
 
-// 要读取元组的元素，使用 _._n，n是从1开始的元素索引
-val d = divideInts(10,3)
+  val divideInts = (x:Int, y:Int) => (x / y, x % y)
 
-d._1
+  divideInts(10,3) // 函数 divideInts 同时返回结果和余数
 
-d._2
+  // 要读取元组的元素，使用 _._n，n是从1开始的元素索引
+  val d = divideInts(10,3)
+
+  d._1
+
+  d._2
 #+end_src
 
 ** 面向对象
@@ -257,7 +255,7 @@ d._2
   - case classes
   - traits
 
-现在来解释这些是什么。
+目前教程只用到了 object （单例对象），class （类）。
 
 *** 类
 类和其他语言的类相似，构造器参数在类名后声明，初始化在类结构体中完成。
