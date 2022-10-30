@@ -1,7 +1,11 @@
 * 搭建开发环境
 ** 安装 scratchip
+需要 python3.8 或大于 3.8 的版本。
+
 #+begin_src bash
-pip3 install scratchip
+  git clone git@github.com:colin4124/chisel3-tutorial.git
+  cd chisel3-tutorial
+  make preppare
 #+end_src
 
 ** 使用 scratchip 创建开发环境
@@ -13,6 +17,45 @@ pip3 install scratchip
 
 生成的 ~verilog~ 放在 ~builds/~ 目录下。
 
+** 运行教程中的示例源码
+生成的项目路径 ~hw/chisel/src/Top.scala~
+
+#+begin_src scala
+import chisel3._
+import chisel3.util._
+
+class Top extends Module {
+  val io = IO(new Bundle{
+    val sel = Input(UInt(1.W))
+    val in0 = Input(UInt(1.W))
+    val in1 = Input(UInt(1.W))
+    val out = Output(UInt(1.W))
+  })
+  io.out := (io.sel & io.in1) | (~io.sel & io.in0)
+}
+
+object Main extends App {
+  (new chisel3.stage.ChiselStage)
+    .emitVerilog(new Top, args)
+}
+#+end_src
+
+改成：
+
+#+begin_src scala
+  import chisel3._
+  import chisel3.util._
+  import chisel3.experimental._
+
+  // 把教程里出现的示例代码拷贝到这里
+
+  object Main extends App {
+    (new chisel3.stage.ChiselStage)
+      .emitVerilog(new Top, args)
+  }
+#+end_src
+
+在项目的根目录运行： ~make verilog~ , 生成的 ~verilog~ 放在 ~builds~ 目录下。
 * 前置知识：Scala 语法
 ** 变量
 通过 ~var~ 或者 ~val~ 来声明变量。 ~val~ 声明不可变的， ~var~ 声明可修改的。
