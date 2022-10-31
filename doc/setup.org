@@ -3,7 +3,18 @@
 需要 python3.8 或大于 3.8 的版本。
 
 #+begin_src bash
-  git clone git@github.com:colin4124/chisel3-tutorial.git
+  git clone https://github.com/colin4124/chisel3-tutorial.git
+#+end_src
+
+如果访问不了 Github 的话，试试国内的 Gitee：
+
+#+begin_src bash
+  git clone https://gitee.com/colin4124/chisel3-tutorial.git
+#+end_src
+
+然后：
+
+#+begin_src bash
   cd chisel3-tutorial
   make prepare
 #+end_src
