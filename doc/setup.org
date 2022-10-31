@@ -19,6 +19,12 @@
   make prepare
 #+end_src
 
+修改下 ~.bashrc~ 的 ~PATH~ 环境变量：
+
+#+begin_src bash
+export PATH=~/.local/bin:$PATH
+#+end_src
+
 ** 使用 scratchip 创建开发环境
 #+begin_src bash
   scratchip create foo
